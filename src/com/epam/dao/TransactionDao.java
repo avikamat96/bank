@@ -10,6 +10,7 @@ import com.epam.exceptions.UserAccountNotFoundException;
  * The Interface TransactionDao.
  *
  * @author Avinash_Kamat
+ * @param <T>
  */
 public interface TransactionDao {
 
@@ -21,7 +22,7 @@ public interface TransactionDao {
    * @throws UserAccountNotFoundException the user account not found exception
    * @throws InsufficientBalanceException the insufficient balance exception
    */
-  void withdrawMoney(long accountNumber, double amount)
+  <T> T withdrawMoney(long accountNumber, double amount)
       throws UserAccountNotFoundException, InsufficientBalanceException;
 
   /**
@@ -31,5 +32,5 @@ public interface TransactionDao {
    * @param amount        the amount
    * @throws UserAccountNotFoundException the user account not found exception
    */
-  void depositMoney(long accountNumber, double amount) throws UserAccountNotFoundException;
+  <T> T depositMoney(long accountNumber, double amount) throws UserAccountNotFoundException;
 }

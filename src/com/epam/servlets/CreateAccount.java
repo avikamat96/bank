@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.epam.enums.AccountType;
 import com.epam.enums.Gender;
@@ -45,12 +46,14 @@ public class CreateAccount extends HttpServlet {
         ? AccountType.SAVINGS
         : AccountType.CURRENT;
     Users user = new Users(userName, userAge, userGender);
+    HttpSession session = request.getSession();
     AccountDaoImpl accountDao = new AccountDaoImpl();
     AccountValidatorService validatorService = new AccountValidatorService();
-    Account account = new Account();
     try {
       if (validatorService.validate(user)) {
-        accountDao.createAccount(user, AccountType.SAVINGS, account);
+        Account account = accountDao.createAccount(user, AccountType.SAVINGS);
+        session.setAttribute("account", account);
+        request.getRequestDispatcher("showProfile.jsp").forward(request, response);
       }
     } catch (UserInformationNotValidException e) {
       response.getWriter().println("Error");

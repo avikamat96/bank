@@ -21,28 +21,30 @@ public class AccountDaoImpl implements AccountDao {
   private static List<Account> accountList = new ArrayList<Account>();
 
   @Override
-  public void createAccount(Users user, AccountType accountType, Account account) {
+  public Account createAccount(Users user, AccountType accountType) {
     long userAccountNumber = GenerateAccountNumber.generateAccountNumber();
+    Account account = new Account();
     account.setAccountType(accountType);
     account.setAccountNumber(userAccountNumber);
     account.setOwner(user);
+    account.setAccountBalance(0.00);
     accountList.add(account);
+    return account;
   }
 
   @Override
-  public boolean deleteAccount(long accountNumber) throws UserAccountNotFoundException {
+  public void deleteAccount(long accountNumber) throws UserAccountNotFoundException {
     for (Account account : accountList) {
       if (account.getAccountNumber() == (accountNumber)) {
-        accountList.remove(account);
-        return true;
+        //accountList.remove(account);
+        account.setAccountType(AccountType.DISABLED);
       }
     }
     throw new UserAccountNotFoundException("Account number does not exist");
   }
 
   @Override
-  public void updateAccount(long accountNumber, Account account)
-      throws UserAccountNotFoundException {
+  public void updateAccount(long accountNumber, Account account) throws UserAccountNotFoundException {
     for (Account tempAccount : accountList) {
       if (tempAccount.getAccountNumber() == accountNumber) {
         accountList.remove(tempAccount);
@@ -62,5 +64,10 @@ public class AccountDaoImpl implements AccountDao {
     }
     throw new UserAccountNotFoundException("Account number does not exist");
 
+  }
+
+  @Override
+  public List<Account> getAllAccounts() {
+    return accountList;
   }
 }

@@ -5,5 +5,5 @@ package com.epam.enums;
  */
 public enum AccountType {
 
-  SAVINGS, CURRENT
+  SAVINGS, CURRENT, DISABLED
 }

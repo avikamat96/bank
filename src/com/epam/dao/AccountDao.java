@@ -3,6 +3,8 @@
  */
 package com.epam.dao;
 
+import java.util.List;
+
 import com.epam.enums.AccountType;
 import com.epam.exceptions.UserAccountNotFoundException;
 import com.epam.models.Account;
@@ -12,17 +14,19 @@ import com.epam.models.Users;
  * The Interface AccountDao.
  *
  * @author Avinash_Kamat
+ * @param <T>
  */
 public interface AccountDao {
 
   /**
    * Creates the account.
+ * @param <T>
    *
    * @param user    the user
    * @param savings the savings
    * @param account the account
    */
-  void createAccount(Users user, AccountType accountType, Account account);
+  <T> T createAccount(Users user, AccountType accountType);
 
   /**
    * Delete account.
@@ -31,7 +35,7 @@ public interface AccountDao {
    * @return true, if successful
    * @throws UserAccountNotFoundException the user account not found exception
    */
-  boolean deleteAccount(long accountNumber) throws UserAccountNotFoundException;
+  void deleteAccount(long accountNumber) throws UserAccountNotFoundException;
 
   /**
    * Update account.
@@ -50,5 +54,7 @@ public interface AccountDao {
    * @throws UserAccountNotFoundException the user account not found exception
    */
   Account getAccountDetails(long accountNumber) throws UserAccountNotFoundException;
+  
+   List<Account> getAllAccounts();
 
 }

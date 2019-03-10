@@ -7,11 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script type="text/javascript">
-window.alert("Enter Correct Credentials!!")
-</script>
-<%
-request.getRequestDispatcher("login.jsp").forward(request, response);
-%>
+<form action="DeleteAccount" method="post">
+Enter Account Number <input type ="number" name ="accountNumber"><br>
+<input type="submit" value="submit">
+</form>
 </body>
 </html>

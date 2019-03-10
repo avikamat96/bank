@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<form action="ViewAccount_AccountNumber" method="post">
+Enter Account Number <input type ="number" name ="accountNumber"><br>
+<input type="submit" value="submit">
+</form>
 </body>
 </html>
