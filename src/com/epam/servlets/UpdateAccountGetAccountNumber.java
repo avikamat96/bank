@@ -1,6 +1,7 @@
 package com.epam.servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.epam.dao.AccountDaoImpl;
 import com.epam.exceptions.UserAccountNotFoundException;
 import com.epam.models.Account;
-import com.epam.services.AccountDaoImpl;
 
 /**
  * Servlet implementation class UpdateAccount
@@ -30,17 +31,18 @@ public class UpdateAccountGetAccountNumber extends HttpServlet {
    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
    *      response)
    */
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
     AccountDaoImpl accountDao = new AccountDaoImpl();
     HttpSession session = request.getSession();
     long accountNumber = Long.parseLong(request.getParameter("accountNumber"));
     try {
       Account account = accountDao.getAccountDetails(accountNumber);
       session.setAttribute("update_account", account);
-      request.getRequestDispatcher("updateUserProfile.jsp").forward(request, response);
+      request.getRequestDispatcher("updateAccount.jsp").forward(request, response);
 
     } catch (UserAccountNotFoundException e) {
-       response.getWriter().println(e.getMessage());
+      response.getWriter().println(e.getMessage());
     }
 
   }

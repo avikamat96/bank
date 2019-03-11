@@ -4,24 +4,18 @@
 package com.epam.services;
 
 import com.epam.dao.AccountDao;
-import com.epam.dao.TransactionDao;
+import com.epam.dao.AccountDaoImpl;
 import com.epam.exceptions.InsufficientBalanceException;
 import com.epam.exceptions.UserAccountNotFoundException;
 import com.epam.models.Account;
 
 /**
- * The Class TransactionDaoMockImpl.
  *
  * @author Avinash_Kamat
  */
-public class TransactionDaoImpl implements TransactionDao {
+public class TransactionService {
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.epam.rd.dao.TransactionDao#withdrawMoney(long, double)
-   */
-  @Override
+ 
   public Account withdrawMoney(long accountNumber, double amount)
       throws UserAccountNotFoundException, InsufficientBalanceException {
     Account account = new Account();
@@ -38,16 +32,9 @@ public class TransactionDaoImpl implements TransactionDao {
 
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.epam.rd.dao.TransactionDao#depositMoney(long, double)
-   */
-  @Override
   public Account depositMoney(long accountNumber, double amount) throws UserAccountNotFoundException {
-    Account account = new Account();
-    AccountDao accountDao = new AccountDaoImpl();
-    account = accountDao.getAccountDetails(accountNumber);
+    AccountService accountService = new AccountService();
+    Account account = accountService.getAccountDetails(accountNumber);
     account.setAccountBalance(account.getAccountBalance() + amount);
     return account;
   }

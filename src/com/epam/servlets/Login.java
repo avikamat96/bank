@@ -29,7 +29,7 @@ public class Login extends HttpServlet {
    */
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    long accountNumber = Long.parseLong(request.getParameter("Account Number"));
+    long accountNumber = Long.parseLong(request.getParameter("Employee id"));
     String password = request.getParameter("Account Password");
     if (accountNumber == 1111 && password.equals("1111")) {
       RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");

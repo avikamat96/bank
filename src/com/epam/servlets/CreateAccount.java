@@ -14,7 +14,7 @@ import com.epam.enums.Gender;
 import com.epam.exceptions.UserInformationNotValidException;
 import com.epam.models.Account;
 import com.epam.models.Users;
-import com.epam.services.AccountDaoImpl;
+import com.epam.services.AccountService;
 import com.epam.services.AccountValidatorService;
 
 /**
@@ -39,24 +39,24 @@ public class CreateAccount extends HttpServlet {
       throws ServletException, IOException {
     String userName = request.getParameter("userName");
     int userAge = Integer.parseInt(request.getParameter("userAge"));
-    Gender userGender = request.getParameter("userGender").equals("male") 
+    Gender userGender = request.getParameter("userGender").toLowerCase().equals("male")
         ? Gender.MALE
         : Gender.FEMALE;
-    AccountType accountType = request.getParameter("accountType").equals("savings")
+    AccountType accountType = request.getParameter("accountType").toLowerCase().equals("savings")
         ? AccountType.SAVINGS
         : AccountType.CURRENT;
     Users user = new Users(userName, userAge, userGender);
     HttpSession session = request.getSession();
-    AccountDaoImpl accountDao = new AccountDaoImpl();
+    AccountService accountService = new AccountService();
     AccountValidatorService validatorService = new AccountValidatorService();
     try {
       if (validatorService.validate(user)) {
-        Account account = accountDao.createAccount(user, AccountType.SAVINGS);
+        Account account = accountService.createAccount(user, accountType);
         session.setAttribute("account", account);
         request.getRequestDispatcher("showProfile.jsp").forward(request, response);
       }
     } catch (UserInformationNotValidException e) {
-      response.getWriter().println("Error");
+      response.getWriter().println(e.getMessage());
     }
 
   }

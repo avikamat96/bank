@@ -4,19 +4,30 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-<form action="" method="post">
-<input type="submit" value="Create Account" onclick="form.action='createAccount.jsp';">
-<br><br>
-<input type="submit" value="Update Account" onclick="form.action='updateAccount_AccountNumber.jsp';">
-<br><br>
-<input type="submit" value="Show Account" onclick="form.action='accountDetails_accountNumber.jsp';">
-<br><br>
-<input type="submit" value="Show All Account" onclick="form.action='listAllAccounts.jsp';">
-<br><br>
-<input type="submit" value="Delete Account" onclick="form.action='deleteAccount_AccountNumber.jsp';">
-</form>
+
+<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="dashboard.jsp">BANK</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="createAccount.jsp">Create Account</a></li>
+				<li><a href="updateAccount_AccountNumber.jsp">Update
+						Account</a></li>
+				<li><a href="accountDetails_accountNumber.jsp">View Account</a></li>
+				<li><a href="listAllAccounts.jsp">View All Account</a></li>
+				<li><a href="deleteAccount_AccountNumber.jsp">Delete
+						Account</a></li>
+				<li><a href="depositMoney.jsp">Deposit </a></li>
+				<li><a href="withdrawMoney.jsp">Withdrawl</a></li>
+			</ul>
+		</div>
+	</nav>
+	<h1 align="center" style="margin: 200px">WELCOME TO EPAM BANK</h1>
 </body>
 </html>
